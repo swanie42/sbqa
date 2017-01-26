@@ -8,8 +8,13 @@ angular.module('paizaqaApp')
       return;
     }
     $scope.submit = function() {
-      $http.post('/api/questions', $scope.question).success(function(){
+      $http.post('/api/questions', $scope.question)
+      .then(function(res){
+          $scope.questionsAnswered = res.data;
+          console.log($scope.questionsAnswered);
         $location.path('/');
-      });
+    }, function (err) {
+        console.error(err);
+    }
     };
   });
